@@ -70,6 +70,37 @@ app.get("/scan/:username", function(req, res){
     });
 });
 
+app.get("/jscan/:username", function(req, res){
+    console.log("JScanning for " + req.params.username);
+    var result = {countries: null, suspension: false};
+    client.get("users/show", { screen_name: req.params.username }, function(error, user){
+        if (error){
+            var reported = false;
+            error.forEach(function(element){
+                if (typeof element.code != "undefined"){
+                    if (element.code == 63){
+                        result.suspension = true;
+                        reported = true;
+                    }
+                }
+            });
+            if (!reported){
+                 res.send(500, "");
+            }
+        } else {
+            if (typeof user.withheld_in_countries != "undefined") {
+                result.countries = user.withheld_in_countries;
+            }
+            if (user.suspended){
+                result.suspension = true;
+            }
+        }
+        try {
+            res.send(JSON.stringify(result));
+        } catch(e){}
+    });
+});
+
 app.get("/raw/:username", function(req, res){
     client.get("users/show", { screen_name: req.params.username }, function(error, user){
         if (error) res.send(500, "");
