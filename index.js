@@ -10,6 +10,7 @@ var express = require('express');
 var twitter = require('twitter');
 var country = require('country-data').countries;
 var lookup = require('country-data').lookup;
+var escape = require('escape-html');
 
 //Config file
 var config = require('./config.json');
@@ -66,6 +67,13 @@ app.get("/scan/:username", function(req, res){
             }
         }
         res.send(result);
+    });
+});
+
+app.get("/raw/:username", function(req, res){
+    client.get("users/show", { screen_name: req.params.username }, function(error, user){
+        if (error) res.send(500, "");
+        res.send(escape(JSON.stringify(user)));
     });
 });
 
