@@ -1,0 +1,31 @@
+{
+  "name": "whois-twitter",
+  "version": "1.0.0",
+  "description": "A Twitter whois service: see where are people blocked, and why are they blocked in those countries.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moriczgergo/twitter-whois.git"
+  },
+  "keywords": [
+    "twitter",
+    "whois",
+    "block",
+    "countries"
+  ],
+  "author": "skiilaa",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/moriczgergo/twitter-whois/issues"
+  },
+  "homepage": "https://github.com/moriczgergo/twitter-whois#readme",
+  "dependencies": {
+    "country-data": "0.0.31",
+    "ejs": "^2.5.6",
+    "express": "^4.15.3",
+    "twitter": "^1.7.1"
+  }
+}
